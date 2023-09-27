@@ -1,0 +1,14 @@
+<div class="container">
+
+  <div class="title">
+    <p>MediBot</p>
+  </div>
+
+  <div class="chat-footer">
+    <form [formGroup]="chatBox" (ngSubmit)="onSubmit()" class="example-form">
+      <mat-form-field class="chat-input">
+        <input matInput type="text" placeholder="Whats your problem" formControlName="chatPrompt" required>
+      </mat-form-field>
+    </form>
+  </div>
+</div>

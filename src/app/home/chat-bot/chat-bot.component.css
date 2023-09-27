@@ -1,0 +1,28 @@
+
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-color: gray;
+}
+
+.title {
+  font-size: 5rem;
+  opacity: 0.2;
+}
+
+.chat-footer {
+  height: 15%;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.example-form {
+  width: 75%;
+}
+.chat-input {
+  width: 100%;
+}
