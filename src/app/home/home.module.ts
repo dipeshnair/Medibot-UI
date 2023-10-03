@@ -7,6 +7,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatCardModule} from "@angular/material/card";
 import {FlexLayoutModule} from "@angular/flex-layout";
 import {ChatBotComponent} from "./chat-bot/chat-bot.component";
+import {MatIconModule} from "@angular/material/icon";
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import {ChatBotComponent} from "./chat-bot/chat-bot.component";
     CommonModule,
     MatInputModule,
     MatFormFieldModule,
+    MatIconModule,
     FormsModule,
     MatButtonModule,
     MatCardModule,

@@ -1,14 +1,44 @@
 <div class="container">
 
   <div class="title">
-    <p>MediBot</p>
+    <div fxLayout="row" class="title-content">
+    <p>MEDI</p><p style="color: blue;">BOT</p>
+    </div>
   </div>
 
-  <div class="chat-footer">
-    <form [formGroup]="chatBox" (ngSubmit)="onSubmit()" class="example-form">
-      <mat-form-field class="chat-input">
-        <input matInput type="text" placeholder="Whats your problem" formControlName="chatPrompt" required>
-      </mat-form-field>
-    </form>
+  <div fxLayout="row" class="content">
+    <div class="left-bar"></div>
+
+    <div class="main-content">
+      <div class="chat-container">
+        <ng-container *ngFor="let message of messagePrompt; let idx=index">
+          <div class="gpt-content">
+            <div class="gpt-box" *ngIf="gptReply.length > 0 && gptReply[gptReply.length - (idx + 1)]">
+              {{gptReply[gptReply.length - (idx + 1)]}}
+            </div>
+          </div>
+          <div class="chat-content">
+            <div class="chat-box">{{messagePrompt[messagePrompt.length - (idx + 1)]}}</div>
+          </div>
+        </ng-container>
+      </div>
+      <div class="content-footer">
+        <form [formGroup]="chatBox" class="input-container" (ngSubmit)="onSubmit()">
+          <textarea formControlName="chatPrompt"
+                    placeholder="Type your answer"
+                    maxlength="5000"
+                    (keydown.enter)="onSubmit()"></textarea>
+          <span class="material-symbols-outlined" (click)="onSubmit()">send</span>
+        </form>
+      </div>
+    </div>
+    <div class="right-bar"></div>
   </div>
+<!--  <div class="chat-footer">-->
+<!--    <form [formGroup]="chatBox" (ngSubmit)="onSubmit()" class="example-form">-->
+<!--      <mat-form-field class="chat-input">-->
+<!--        <input matInput type="text" placeholder="Whats your problem" formControlName="chatPrompt" required>-->
+<!--      </mat-form-field>-->
+<!--    </form>-->
+<!--  </div>-->
 </div>
