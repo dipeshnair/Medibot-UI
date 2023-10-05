@@ -10,35 +10,51 @@
     <div class="left-bar"></div>
 
     <div class="main-content">
-      <div class="chat-container">
-        <ng-container *ngFor="let message of messagePrompt; let idx=index">
-          <div class="gpt-content">
-            <div class="gpt-box" *ngIf="gptReply.length > 0 && gptReply[gptReply.length - (idx + 1)]">
-              {{gptReply[gptReply.length - (idx + 1)]}}
+
+      <div class="initial-content" *ngIf="!chatInitiated">
+        <div class="initial-box" (click)="getStarted()">Lets get Started</div>
+      </div>
+      <div class="chat-container" *ngIf="chatInitiated">
+
+<!--        <ng-container *ngFor="let find of googleFinds">-->
+<!--          <div></div>-->
+
+<!--        </ng-container>-->
+
+        <ng-container *ngFor="let chatmessage of messagePrompt.reverse(); let idx=index">
+
+          <div class="gpt-content" *ngIf="chatmessage.gptMessage">
+            <div class="gpt-box">
+              <span class="material-symbols-outlined avatar">smart_toy</span>
+              {{chatmessage.message}}
             </div>
           </div>
-          <div class="chat-content">
-            <div class="chat-box">{{messagePrompt[messagePrompt.length - (idx + 1)]}}</div>
+          <div class="chat-content" *ngIf="!chatmessage.gptMessage">
+            <div class="chat-box">
+              <span class="material-symbols-outlined avatar">account_circle</span>
+              {{chatmessage.message}}
+            </div>
           </div>
         </ng-container>
       </div>
+
+      <div class="suggestion-container" *ngIf="typeOfMessage === 1">
+        <div class="suggestion" (click)="onSuggestion(1)">Do you want find providers based on the location</div>
+        <div class="suggestion" (click)="onSuggestion(2)">Continue again with problems</div>
+        <div class="suggestion" (click)="onSuggestion(3)">End the conversation</div>
+      </div>
+
       <div class="content-footer">
         <form [formGroup]="chatBox" class="input-container" (ngSubmit)="onSubmit()">
           <textarea formControlName="chatPrompt"
                     placeholder="Type your answer"
                     maxlength="5000"
                     (keydown.enter)="onSubmit()"></textarea>
-          <span class="material-symbols-outlined" (click)="onSubmit()">send</span>
+          <span class="material-symbols-outlined send-btn" (click)="onSubmit()">send</span>
         </form>
       </div>
     </div>
+
     <div class="right-bar"></div>
   </div>
-<!--  <div class="chat-footer">-->
-<!--    <form [formGroup]="chatBox" (ngSubmit)="onSubmit()" class="example-form">-->
-<!--      <mat-form-field class="chat-input">-->
-<!--        <input matInput type="text" placeholder="Whats your problem" formControlName="chatPrompt" required>-->
-<!--      </mat-form-field>-->
-<!--    </form>-->
-<!--  </div>-->
 </div>

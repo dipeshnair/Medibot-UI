@@ -12,4 +12,8 @@ export class ChatBotService {
     return this.httpClient.post<any>("http://127.0.0.1:5000/gpt", message);
   }
 
+  public getProvider(data: any) {
+    return this.httpClient.post<any>("http://127.0.0.1:5000/gpt/loc", data);
+  }
+
 }
