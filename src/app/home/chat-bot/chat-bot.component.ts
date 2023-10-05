@@ -95,6 +95,7 @@ export class ChatBotComponent {
         if (res !== undefined && res !== null) {
           this.googleFinds = JSON.parse(res);
           console.log("response", this.googleFinds);
+          setTimeout(() => this.typeOfMessage = 1, 1000);
         }
         // 'Name': Name,
         //   'Address': Address,

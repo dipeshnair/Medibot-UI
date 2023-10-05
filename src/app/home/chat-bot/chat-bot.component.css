@@ -108,6 +108,55 @@
   align-items: center;
 }
 
+.google-data {
+  min-width: 25%;
+  height: 9rem;
+  border-radius: 20px;
+  /*background-color: beige;*/
+  margin-right: 1rem;
+  /*padding: 0.5rem;*/
+  border-style: ridge;
+  border-color: lightgrey;
+}
+
+.data-top {
+  height: 20%;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  background-color: #6495ed30;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+.data-middle {
+  height: 55%;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  background-color: #fafafab3;
+  border-bottom-style: ridge;
+  white-space: break-spaces !important;
+  overflow: auto !important;
+}
+.data-bottom {
+  height: 25%;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  background-color: #fafafab3;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border-bottom-style: ridge;
+}
+
+.data-bottom-left {
+  border-right-style: ridge;
+  width: 50%;
+}
+.google-suggestion {
+  padding: 2rem;
+  display: flex;
+  justify-content: flex-start;
+}
 .avatar {
   padding-right: 0.2rem;
   padding-left: 0.2rem;
@@ -194,3 +243,10 @@ textarea:focus {
 /*.chat-input {*/
 /*  width: 100%;*/
 /*}*/
+
+
+.overflow-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

@@ -16,10 +16,18 @@
       </div>
       <div class="chat-container" *ngIf="chatInitiated">
 
-<!--        <ng-container *ngFor="let find of googleFinds">-->
-<!--          <div></div>-->
-
-<!--        </ng-container>-->
+        <div class="google-suggestion">
+        <ng-container *ngFor="let find of googleFinds">
+          <div class="google-data">
+            <div class="data-top overflow-ellipsis">{{find['Name']}}</div>
+            <div class="data-middle overflow-ellipsis">{{find['Address']}}</div>
+            <div class="data-bottom">
+              <div class="data-bottom-left">ph: {{find['Phone']}}</div>
+              <div>Direction some</div>
+            </div>
+          </div>
+        </ng-container>
+        </div>
 
         <ng-container *ngFor="let chatmessage of messagePrompt.reverse(); let idx=index">
 
