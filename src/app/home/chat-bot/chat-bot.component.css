@@ -109,7 +109,7 @@
 }
 
 .google-data {
-  min-width: 25%;
+  min-width: 32.5%;
   height: 9rem;
   border-radius: 20px;
   /*background-color: beige;*/
@@ -149,6 +149,7 @@
 }
 
 .data-bottom-left {
+  display:flex;
   border-right-style: ridge;
   width: 50%;
 }
@@ -210,6 +211,7 @@ textarea:focus {
   background-color: cornflowerblue;
   opacity: 1;
   cursor: pointer;
+  color:white;
 }
 
 .initial-box:hover {
@@ -221,6 +223,7 @@ textarea:focus {
   flex-direction: row;
   padding: 0.5rem;
   justify-content: space-around;
+  color:white;
 }
 
 .suggestion {
@@ -249,4 +252,40 @@ textarea:focus {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+.Direction {
+  display:flex;
+}
+.phone-number {
+  margin-left: 0.4rem;
+  margin-top: 0.5rem;
+  cursor:pointer;
+  color:blue;
+}
+.phone-icon {
+  margin-top: 0.2rem;
+  color:blue;
+}
+.direction-link {
+  margin-right:0.5rem;
+  margin-top: 0.5rem;
+  color:blue;
+  cursor:pointer;
+}
+
+.direction-icon {
+ margin-right: 1rem;
+ margin-top: 0.4rem;
+ color:blue;
+}
+
+.time-container {
+  height:20%;
+  display:flex;
+}
+.open {
+  width:50%;
+}
+.close {
+  width:50%;
 }

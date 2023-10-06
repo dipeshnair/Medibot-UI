@@ -21,9 +21,19 @@
           <div class="google-data">
             <div class="data-top overflow-ellipsis">{{find['Name']}}</div>
             <div class="data-middle overflow-ellipsis">{{find['Address']}}</div>
+            <div class="time-container">
+              <div class="open">Open {{find['Open']}}</div>
+              <div class="close">Close {{find['Close']}}</div>
+            </div>
             <div class="data-bottom">
-              <div class="data-bottom-left">ph: {{find['Phone']}}</div>
-              <div>Direction some</div>
+              <div class="data-bottom-left">
+                <div class="phone-icon"><span class="material-symbols-outlined">call</span></div>
+                <div class="phone-number">{{find['Phone']}}</div>
+              </div>
+              <div class="Direction">
+                <div class="direction-link">Directions</div>
+                <div class="direction-icon"><span class="material-symbols-outlined">assistant_direction</span></div>
+              </div>
             </div>
           </div>
         </ng-container>
