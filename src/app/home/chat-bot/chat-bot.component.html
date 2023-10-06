@@ -17,18 +17,29 @@
       <div class="chat-container" *ngIf="chatInitiated">
 
         <div class="google-suggestion" *ngIf="googleFindContent.length > 0">
-          <span class="material-symbols-outlined"
+          <span class="material-symbols-outlined pointer"
                 (click)="showGoogleFinds(false)"
                 [ngStyle]="googleFinds.indexOf(googleFindContent[0]) > 0 ? {'color': 'blue' } : {'color': '#0000ff42' }">
 arrow_back_ios
 </span>
         <ng-container *ngFor="let find of googleFindContent">
           <div class="google-data">
-            <div class="data-top overflow-ellipsis">{{find['Name']}}</div>
+            <div class="data-top">
+              <div class="name overflow-ellipsis pointer">{{find['Name']}}</div>
+              <div class="hidden-name">{{find['Name']}}</div>
+              <div class="rating">
+                <div><span class="material-symbols-outlined star">grade</span></div>
+                <div class="rating-value pointer">{{find['Rating']}} </div>
+                <div class="hidden-rating">Hospital Ratings</div>
+                <div class="review-count overflow-ellipsis pointer" > ({{find['ReviewCount']}})</div>
+                <div class="hidden-review-count">Google Reviews</div>
+              </div>
+            </div>
+
             <div class="data-middle overflow-ellipsis">{{find['Address']}}</div>
             <div class="time-container">
-              <div class="open">Open {{find['Open']}}</div>
-              <div class="close">Close {{find['Close']}}</div>
+              <div class="open"><span style="color:green">Open</span> {{find['Open']}}</div>
+              <div class="close"><span style="color:red">Close</span> {{find['Close']}}</div>
             </div>
             <div class="data-bottom">
               <div class="data-bottom-left">
@@ -42,7 +53,7 @@ arrow_back_ios
             </div>
           </div>
         </ng-container>
-          <span class="material-symbols-outlined"
+          <span class="material-symbols-outlined pointer"
                 (click)="showGoogleFinds(true)"
                 [ngStyle]="googleFinds.length > googleFinds.indexOf(googleFindContent[2]) + 1 ? {'color': 'blue' }: {'color': '#0000ff42'}">
 arrow_forward_ios
@@ -67,9 +78,9 @@ arrow_forward_ios
       </div>
 
       <div class="suggestion-container" *ngIf="typeOfMessage === 1">
-        <div class="suggestion" (click)="onSuggestion(1)">Do you want find providers based on the location</div>
-        <div class="suggestion" (click)="onSuggestion(2)">Continue again with problems</div>
-        <div class="suggestion" (click)="onSuggestion(3)">End the conversation</div>
+        <div class="suggestion pointer" (click)="onSuggestion(1)">Do you want find providers based on the location</div>
+        <div class="suggestion pointer" (click)="onSuggestion(2)">Continue again with problems</div>
+        <div class="suggestion pointer" (click)="onSuggestion(3)">End the conversation</div>
       </div>
 
       <div class="content-footer">
@@ -78,7 +89,7 @@ arrow_forward_ios
                     placeholder="Type your answer"
                     maxlength="5000"
                     (keydown.enter)="onSubmit()"></textarea>
-          <span class="material-symbols-outlined send-btn" (click)="onSubmit()">send</span>
+          <span class="material-symbols-outlined send-btn pointer" (click)="onSubmit()">send</span>
         </form>
         <div style="opacity: 0.5">Powered by <strong>Ideas2IT</strong></div>
       </div>
