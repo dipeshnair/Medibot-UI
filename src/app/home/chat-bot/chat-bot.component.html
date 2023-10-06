@@ -12,12 +12,17 @@
     <div class="main-content">
 
       <div class="initial-content" *ngIf="!chatInitiated">
-        <div class="initial-box" (click)="getStarted()">Lets get Started</div>
+        <div class="initial-box" (click)="getStarted()">Talk to MediBot</div>
       </div>
       <div class="chat-container" *ngIf="chatInitiated">
 
-        <div class="google-suggestion">
-        <ng-container *ngFor="let find of googleFinds">
+        <div class="google-suggestion" *ngIf="googleFindContent.length > 0">
+          <span class="material-symbols-outlined"
+                (click)="showGoogleFinds(false)"
+                [ngStyle]="googleFinds.indexOf(googleFindContent[0]) > 0 ? {'color': 'blue' } : {'color': '#0000ff42' }">
+arrow_back_ios
+</span>
+        <ng-container *ngFor="let find of googleFindContent">
           <div class="google-data">
             <div class="data-top overflow-ellipsis">{{find['Name']}}</div>
             <div class="data-middle overflow-ellipsis">{{find['Address']}}</div>
@@ -30,13 +35,18 @@
                 <div class="phone-icon"><span class="material-symbols-outlined">call</span></div>
                 <div class="phone-number">{{find['Phone']}}</div>
               </div>
-              <div class="Direction">
+              <div class="Direction" (click)="getDirection(find['MapDirection'])">
                 <div class="direction-link">Directions</div>
                 <div class="direction-icon"><span class="material-symbols-outlined">assistant_direction</span></div>
               </div>
             </div>
           </div>
         </ng-container>
+          <span class="material-symbols-outlined"
+                (click)="showGoogleFinds(true)"
+                [ngStyle]="googleFinds.length > googleFinds.indexOf(googleFindContent[2]) + 1 ? {'color': 'blue' }: {'color': '#0000ff42'}">
+arrow_forward_ios
+</span>
         </div>
 
         <ng-container *ngFor="let chatmessage of messagePrompt.reverse(); let idx=index">
@@ -49,7 +59,7 @@
           </div>
           <div class="chat-content" *ngIf="!chatmessage.gptMessage">
             <div class="chat-box">
-              <span class="material-symbols-outlined avatar">account_circle</span>
+              <span class="material-symbols-outlined avatar" style="color: blue">account_circle</span>
               {{chatmessage.message}}
             </div>
           </div>
@@ -70,6 +80,7 @@
                     (keydown.enter)="onSubmit()"></textarea>
           <span class="material-symbols-outlined send-btn" (click)="onSubmit()">send</span>
         </form>
+        <div style="opacity: 0.5">Powered by <strong>Ideas2IT</strong></div>
       </div>
     </div>
 

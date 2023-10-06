@@ -5,7 +5,8 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  background-color: #d3d3d3ab;
+  background-color: #f9faf9;
+  font-family: sans-serif;
 }
 
 .title {
@@ -79,6 +80,7 @@
   max-width: 30rem;
   display: flex;
   align-items: center;
+  border-radius: 10px;
 }
 
 .chat-content {
@@ -91,6 +93,17 @@
 .gpt-content {
   padding-left: 4rem;
 }
+.chat-container::-webkit-scrollbar {
+  width: 2em;
+  height: 2em;
+  cursor: pointer;
+}
+
+.data-middle::-webkit-scrollbar {
+  width: 5em !important;
+  cursor: pointer;
+}
+
 
 .gpt-box {
   width: max-content;
@@ -102,25 +115,28 @@
   border-style: solid;
   border-color: #80808094;
   border-width: thin;
-  background-color: #4169e1db;
+  background-color: #2a62f0;
+  color: white;
   max-width: 30rem;
   display: flex;
   align-items: center;
+  border-radius: 10px;
 }
 
 .google-data {
-  min-width: 32.5%;
-  height: 9rem;
+  height: 11rem;
   border-radius: 20px;
   /*background-color: beige;*/
   margin-right: 1rem;
   /*padding: 0.5rem;*/
   border-style: ridge;
   border-color: lightgrey;
+  min-width: 30%;
+  max-width: 30%;
 }
 
 .data-top {
-  height: 20%;
+  height: 2rem;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
   background-color: #6495ed30;
@@ -128,7 +144,7 @@
   border-top-right-radius: 20px;
 }
 .data-middle {
-  height: 55%;
+  height: 5rem;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
   background-color: #fafafab3;
@@ -137,7 +153,7 @@
   overflow: auto !important;
 }
 .data-bottom {
-  height: 25%;
+  height: 2rem;
   display: flex;
   justify-content: space-between;
   padding-left: 0.5rem;
@@ -157,6 +173,7 @@
   padding: 2rem;
   display: flex;
   justify-content: flex-start;
+  align-items: center;
 }
 .avatar {
   padding-right: 0.2rem;
@@ -186,6 +203,8 @@ textarea:focus {
   display: flex;
   justify-content: space-around;
   width: 100%;
+  flex-direction: column;
+  align-items: center;
 }
 
 .right-bar {
@@ -206,7 +225,7 @@ textarea:focus {
   width: max-content;
   border-style: unset;
   padding: 0.5rem;
-  border-radius: 15px;
+  border-radius: 10px;
   font-size: 1.5rem;
   background-color: cornflowerblue;
   opacity: 1;
@@ -230,7 +249,7 @@ textarea:focus {
   width: max-content;
   padding: 0.5rem;
   border-radius: 15px;
-  background-color: cornflowerblue;
+  background-color: #3f51b5;
 }
 
 /*.chat-footer {*/
@@ -280,7 +299,7 @@ textarea:focus {
 }
 
 .time-container {
-  height:20%;
+  height:2rem;
   display:flex;
 }
 .open {

@@ -14,7 +14,8 @@ export class ChatBotComponent {
   public chatInitiated: boolean = false;
   public typeOfMessage: number = 0;
   public specializationRequest: string [] = [];
-  public googleFinds: [] = [];
+  public googleFinds: any [] = [];
+  public googleFindContent: any [] = [];
 
   constructor(private _fb: FormBuilder,
               private _chatBotService: ChatBotService) {
@@ -59,9 +60,13 @@ export class ChatBotComponent {
     this.chatInitiated = true;
     this.messagePrompt.push({message: "Hi Medibot", gptMessage: false});
     setTimeout(() => {
-      this.messagePrompt.push({message: "Hi, Please state your symptoms or problems", gptMessage: true});
+      this.messagePrompt.push({message: "Hi, How can I help you? How do you feel today?", gptMessage: true});
       this.chatBox.get('chatPrompt')?.enable();
     }, 1000);
+  }
+
+  public getDirection(direction: string) {
+      window.open(direction);
   }
 
   private resetInput() {
@@ -94,6 +99,7 @@ export class ChatBotComponent {
       .subscribe(res => {
         if (res !== undefined && res !== null) {
           this.googleFinds = JSON.parse(res);
+          this.showGoogleFinds();
           console.log("response", this.googleFinds);
           setTimeout(() => this.typeOfMessage = 1, 1000);
         }
@@ -106,6 +112,19 @@ export class ChatBotComponent {
         //   'ReviewCount': review_count,
         //   'MapDirection': map_direction
       });
+  }
+
+  public showGoogleFinds(isRight?: boolean) {
+    const array = Array.from(this.googleFinds);
+    if (isRight === undefined) {
+      this.googleFindContent = array.splice(0, 3);
+    } else if (isRight && this.googleFindContent.length >= 3) {
+      const firstEle = this.googleFinds.indexOf(this.googleFindContent[2]) + 1;
+      this.googleFindContent = array.splice(firstEle, 3);
+    } else if (!isRight && this.googleFindContent.length >= 1) {
+      const firstEle = this.googleFinds.indexOf(this.googleFindContent[0]) - 1;
+      this.googleFindContent = array.splice(firstEle, 3)
+    }
   }
 
   private findSpecialization(gptResponse: string) {
