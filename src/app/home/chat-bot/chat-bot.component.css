@@ -53,6 +53,7 @@
   padding-bottom: 2rem;
   flex-direction: column-reverse;
   overflow: auto;
+  font-family: 'inter', sans-serif;
 }
 .input-container {
   height: 30%;
@@ -63,7 +64,6 @@
   border-color: #80808066;
   padding: 0.5rem;
   background-color: white;
-
 }
 
 .chat-box {
@@ -91,6 +91,7 @@
 
 .gpt-content {
   padding-left: 4rem;
+  font-family: 'Roboto', sans-serif;
 }
 .chat-container::-webkit-scrollbar {
   width: 2em;
@@ -102,6 +103,7 @@
   width: 5em !important;
   cursor: pointer;
   text-size:14px;
+  font-family: 'Baskervville', serif;
 }
 
 
@@ -123,7 +125,7 @@
 }
 
 .google-data {
-  height: 11rem;
+  height: 12rem;
   border-radius: 20px;
   /*background-color: beige;*/
   margin-right: 1rem;
@@ -153,7 +155,7 @@
   overflow: auto !important;
 }
 .data-bottom {
-  height: 2rem;
+  height: 2.8rem;
   display: flex;
   justify-content: space-between;
   padding-left: 0.5rem;
@@ -177,15 +179,17 @@
   align-items: center;
 }
 .avatar {
-  padding-right: 0.2rem;
-  padding-left: 0.2rem;
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
 }
+
 textarea {
   border: none;
   width: 95%;
   position: relative;
   box-sizing: initial;
   resize: none;
+  margin-top:0.3rem
 }
 .send-btn {
   color: blue;
@@ -251,6 +255,8 @@ textarea:focus {
   padding: 0.5rem;
   border-radius: 15px;
   background-color: #3f51b5;
+  padding-left:1rem;
+  padding-right:1rem
 }
 
 /*.chat-footer {*/
@@ -278,25 +284,25 @@ textarea:focus {
 }
 .phone-number {
   margin-left: 0.4rem;
-  margin-top: 0.5rem;
+  margin-top: 0.9rem;
   cursor:pointer;
   color:blue;
   font-size:14px;
 }
 .phone-icon {
-  margin-top: 0.2rem;
+  margin-top: 0.6rem;
   color:blue;
 }
 .direction-link {
   margin-right:0.5rem;
-  margin-top: 0.5rem;
+  margin-top: 0.8rem;
   color:blue;
   cursor:pointer;
 }
 
 .direction-icon {
  margin-right: 1rem;
- margin-top: 0.4rem;
+ margin-top: 0.7rem;
  color:blue;
 }
 
@@ -348,8 +354,8 @@ textarea:focus {
 
 .hidden-review-count {
   display: none;
-  background-color:black;
-  color:white;
+  background-color:#f3b8fc;
+  color:black;
   position: absolute;
   margin-top: -1.5rem;
 }
