@@ -14,7 +14,41 @@ export class ChatBotComponent {
   public chatInitiated: boolean = false;
   public typeOfMessage: number = 0;
   public specializationRequest: string [] = [];
-  public googleFinds: any [] = [];
+//   public googleFinds: any [] = [];
+  public googleFinds: any[] = [
+                       {"Name":"Dr. Abirami Krithiga Jayakumar",
+                        "Address":"Metro Station, 157, Anna Salai, Little Mount, Guindy, Chennai, Tamil Nadu 600015, India",
+                        "Phone":"N/A",
+                        "Rating":"N/A",
+                        "Open":"02:00 PM",
+                        "Close":"05:00 PM",
+                        "ReviewCount":"N/A",
+                        "Directions":"https://www.google.com/maps?q=13.654323 , 80.675432"},
+                       {"Name":"Dr. Abirami Krithiga Jayakumar",
+                        "Address":"Metro Station, 157, Anna Salai, Little Mount, Guindy, Chennai, Tamil Nadu 600015, India",
+                        "Phone":"9876543212",
+                        "Rating":"5",
+                        "Open":"N/A",
+                        "Close":"05:00 PM",
+                        "ReviewCount":"N/A",
+                        "Directions":"https://www.google.com/maps?q=13.654323 , 80.675432"},
+                       {"Name":"Dr. Abirami Krithiga Jayakumar",
+                        "Address":"Metro Station, 157, Anna Salai, Little Mount, Guindy, Chennai, Tamil Nadu 600015, India",
+                        "Phone":"8978675432",
+                        "Rating":"5",
+                        "Open":"02:00 PM",
+                        "Close":"N/A",
+                        "ReviewCount":"2",
+                        "Directions":"https://www.google.com/maps?q=13.654323 , 80.675432"},
+                        {"Name":"Dr. Abirami Krithiga Jayakumar",
+                         "Address":"Metro Station, 157, Anna Salai, Little Mount, Guindy, Chennai, Tamil Nadu 600015, India",
+                         "Phone":"8978675432",
+                         "Rating":"5",
+                         "Open":"02:00 PM",
+                         "Close":"05:00 PM",
+                         "ReviewCount":"2",
+                         "Directions":"https://www.google.com/maps?q=13.654323 , 80.675432"}];
+
   public googleFindContent: any [] = [];
 
   constructor(private _fb: FormBuilder,
@@ -42,12 +76,12 @@ export class ChatBotComponent {
 
   public onSuggestion(val: number) {
     if (val === 1) {
-      this.messagePrompt.push({message: "Find providers by location", gptMessage: false});
+      this.messagePrompt.push({message: "I would like find doctor's based on the location", gptMessage: false});
       this.typeOfMessage = 2;
       setTimeout(() => this.messagePrompt.push({message: "Please state your location", gptMessage: true}), 1500);
     } else if (val === 2) {
-      this.messagePrompt.push({message: "I want to share my other problems", gptMessage: false});
-      setTimeout(() => this.messagePrompt.push({message: "Please state your symptoms or problems", gptMessage: true}), 1500);
+      this.messagePrompt.push({message: "I would like to continue", gptMessage: false});
+      setTimeout(() => this.messagePrompt.push({message: "Please state your health concerns", gptMessage: true}), 1500);
       this.typeOfMessage = 0;
     } else if (val == 3) {
       this.chatInitiated = false;
@@ -95,27 +129,22 @@ export class ChatBotComponent {
       location : message,
       specialization: this.specializationRequest.toString()
     }
-    this._chatBotService.getProvider(data)
-      .subscribe(res => {
-        if (res !== undefined && res !== null) {
-          this.googleFinds = JSON.parse(res);
-          this.showGoogleFinds();
-          console.log("response", this.googleFinds);
-          setTimeout(() => this.typeOfMessage = 1, 1000);
-        }
-        // 'Name': Name,
-        //   'Address': Address,
-        //   'Phone': Phone,
-        //   'Rating': Rating,
-        //   'Open': open,
-        //   'Close': close,
-        //   'ReviewCount': review_count,
-        //   'MapDirection': map_direction
-      });
+    this.showGoogleFinds();
+    setTimeout(() => this.typeOfMessage = 1, 1000);
+//     this._chatBotService.getProvider(data)
+//       .subscribe(res => {
+//         if (res !== undefined && res !== null) {
+//           this.googleFinds = JSON.parse(res);
+//           this.showGoogleFinds();
+//           console.log("response", this.googleFinds);
+//           setTimeout(() => this.typeOfMessage = 1, 1000);
+//         }
+//       });
   }
 
   public showGoogleFinds(isRight?: boolean) {
     const array = Array.from(this.googleFinds);
+    console.log(array)
     if (isRight === undefined) {
       this.googleFindContent = array.splice(0, 3);
     } else if (isRight && this.googleFindContent.length >= 3) {
@@ -130,15 +159,16 @@ export class ChatBotComponent {
   private findSpecialization(gptResponse: string) {
     const specialization = ['Anesthesiologist', 'Cardiologist', 'Dermatologist', 'Emergency', 'Medicine',
       'Endocrinologist', 'Gastroenterologist', 'Hematologist', 'Infectious',
-      'Internal', 'Neurologist', 'Neurologist', 'Obstetrics', 'Gynecologist',
-      'Oncologist', 'Ophthalmology', 'Orthopedics', 'Otolaryngology',
-      'Pathologist', 'Pediatrics', 'Physical', 'Rehabilitation',
-      'Psychiatry', 'Pulmonologist', 'Radiologist', 'Rheumatologist', 'Surgery',
-      'Urology', 'Addiction', 'Allergy', 'Immunologist', 'Barbaric', 'Cardio-thoracic',
-      'Colorectal', 'Family', 'Forensic', 'Geriatrics', 'Interventional',
+      'Internal', 'Neurologist', 'Urologist', 'Obstetrician', 'Gynecologist',
+      'Oncologist', 'Ophthalmologist', 'Orthopedics', 'Otolaryngology',
+      'Pathologist', 'Pediatrician', 'Physical', 'Rehabilitation',
+      'Psychiatrist', 'Pulmonologist', 'Radiologist', 'Rheumatologist', 'Surgery',
+      'Urology', 'Addiction', 'Allergist', 'Immunologist', 'Barbaric', 'Cardio-thoracic',
+      'Colorectal', 'Family', 'Forensic', 'Geriatrician', 'Interventional',
       'Maternal-Fetal', 'Neonatologist', 'Acupuncturist', 'Physiotherapist', 'Osteopath',
       'cardiomyopathy', 'physiotherapist', 'therapist', 'reflexology', 'osteopath',
-      'Arthroscopic', 'Osteoarthritis', 'diabetes', 'Hypothermia']
+      'Arthroscopic', 'Osteoarthritis', 'diabetes', 'Hypothermia', 'Orthopedic Surgeon', 'ENT Specialist',
+       'Nephrologist']
 
     const gptResponseList = gptResponse.split(" ");
     console.log(gptResponseList);

@@ -12,7 +12,7 @@
     <div class="main-content">
 
       <div class="initial-content" *ngIf="!chatInitiated">
-        <div class="initial-box" (click)="getStarted()">Talk to MediBot</div>
+        <div class="initial-box" (click)="getStarted()">Health Queries? Ask MediBot !</div>
       </div>
       <div class="chat-container" *ngIf="chatInitiated">
 
@@ -29,22 +29,22 @@ arrow_back_ios
               <div class="hidden-name">{{find['Name']}}</div>
               <div class="rating">
                 <div><span class="material-symbols-outlined star">grade</span></div>
-                <div class="rating-value pointer">{{find['Rating']}} </div>
+                <div class="rating-value pointer">{{ find['Rating'] === 'N/A' ? '--' : find['Rating'] }} </div>
                 <div class="hidden-rating">Hospital Ratings</div>
-                <div class="review-count overflow-ellipsis pointer" > ({{find['ReviewCount']}})</div>
+                <div class="review-count overflow-ellipsis pointer"> ({{ find['ReviewCount'] === 'N/A' ? '--' : find['ReviewCount'] }})</div>
                 <div class="hidden-review-count">Google Reviews</div>
               </div>
             </div>
 
             <div class="data-middle overflow-ellipsis">{{find['Address']}}</div>
             <div class="time-container">
-              <div class="open"><span style="color:green">Open</span> {{find['Open']}}</div>
-              <div class="close"><span style="color:red">Close</span> {{find['Close']}}</div>
+              <div class="open"><span style="color:green">Open</span> {{ find['Open'] === 'N/A' ? '--' : find['Open'] }}</div>
+              <div class="close"><span style="color:red">Close</span> {{ find['Close'] === 'N/A' ? '--' : find['Close'] }}</div>
             </div>
             <div class="data-bottom">
               <div class="data-bottom-left">
                 <div class="phone-icon"><span class="material-symbols-outlined">call</span></div>
-                <div class="phone-number">{{find['Phone']}}</div>
+                <div class="phone-number">{{ find['Phone'] === 'N/A' ? '--' : find['Phone'] }}</div>
               </div>
               <div class="Direction" (click)="getDirection(find['MapDirection'])">
                 <div class="direction-link">Directions</div>
@@ -78,8 +78,8 @@ arrow_forward_ios
       </div>
 
       <div class="suggestion-container" *ngIf="typeOfMessage === 1">
-        <div class="suggestion pointer" (click)="onSuggestion(1)">Do you want find providers based on the location</div>
-        <div class="suggestion pointer" (click)="onSuggestion(2)">Continue again with problems</div>
+        <div class="suggestion pointer" (click)="onSuggestion(1)">May I assist you in finding nearby doctors based on your location?</div>
+        <div class="suggestion pointer" (click)="onSuggestion(2)" *ngIf="googleFinds.length <= 0">Do you have more symptoms or health concerns you'd like to discuss?</div>
         <div class="suggestion pointer" (click)="onSuggestion(3)">End the conversation</div>
       </div>
 
