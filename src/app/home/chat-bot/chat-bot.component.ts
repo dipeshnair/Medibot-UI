@@ -14,40 +14,7 @@ export class ChatBotComponent {
   public chatInitiated: boolean = false;
   public typeOfMessage: number = 0;
   public specializationRequest: string [] = [];
-//   public googleFinds: any [] = [];
-  public googleFinds: any[] = [
-                       {"Name":"Dr. Abirami Krithiga Jayakumar",
-                        "Address":"Metro Station, 157, Anna Salai, Little Mount, Guindy, Chennai, Tamil Nadu 600015, India",
-                        "Phone":"N/A",
-                        "Rating":"N/A",
-                        "Open":"02:00 PM",
-                        "Close":"05:00 PM",
-                        "ReviewCount":"N/A",
-                        "Directions":"https://www.google.com/maps?q=13.654323 , 80.675432"},
-                       {"Name":"Dr. Abirami Krithiga Jayakumar",
-                        "Address":"Metro Station, 157, Anna Salai, Little Mount, Guindy, Chennai, Tamil Nadu 600015, India",
-                        "Phone":"9876543212",
-                        "Rating":"5",
-                        "Open":"N/A",
-                        "Close":"05:00 PM",
-                        "ReviewCount":"N/A",
-                        "Directions":"https://www.google.com/maps?q=13.654323 , 80.675432"},
-                       {"Name":"Dr. Abirami Krithiga Jayakumar",
-                        "Address":"Metro Station, 157, Anna Salai, Little Mount, Guindy, Chennai, Tamil Nadu 600015, India",
-                        "Phone":"8978675432",
-                        "Rating":"5",
-                        "Open":"02:00 PM",
-                        "Close":"N/A",
-                        "ReviewCount":"2",
-                        "Directions":"https://www.google.com/maps?q=13.654323 , 80.675432"},
-                        {"Name":"Dr. Abirami Krithiga Jayakumar",
-                         "Address":"Metro Station, 157, Anna Salai, Little Mount, Guindy, Chennai, Tamil Nadu 600015, India",
-                         "Phone":"8978675432",
-                         "Rating":"5",
-                         "Open":"02:00 PM",
-                         "Close":"05:00 PM",
-                         "ReviewCount":"2",
-                         "Directions":"https://www.google.com/maps?q=13.654323 , 80.675432"}];
+  public googleFinds: any [] = [];
 
   public googleFindContent: any [] = [];
 
@@ -78,11 +45,19 @@ export class ChatBotComponent {
     if (val === 1) {
       this.messagePrompt.push({message: "I would like find doctor's based on the location", gptMessage: false});
       this.typeOfMessage = 2;
-      setTimeout(() => this.messagePrompt.push({message: "Please state your location", gptMessage: true}), 1500);
+      setTimeout(() => {
+      this.messagePrompt.push({message: "Please state your location", gptMessage: true});
+      this.chatBox.get('chatPrompt')?.enable();
+      }, 1500);
+
     } else if (val === 2) {
       this.messagePrompt.push({message: "I would like to continue", gptMessage: false});
-      setTimeout(() => this.messagePrompt.push({message: "Please state your health concerns", gptMessage: true}), 1500);
+      setTimeout(() => {
+      this.messagePrompt.push({message: "Please state your health concerns", gptMessage: true});
+      this.chatBox.get('chatPrompt')?.enable();
+      }, 1500);
       this.typeOfMessage = 0;
+      this.chatBox.get('chatPrompt')?.enable();
     } else if (val == 3) {
       this.chatInitiated = false;
       this.messagePrompt = [];
@@ -131,15 +106,15 @@ export class ChatBotComponent {
     }
     this.showGoogleFinds();
     setTimeout(() => this.typeOfMessage = 1, 1000);
-//     this._chatBotService.getProvider(data)
-//       .subscribe(res => {
-//         if (res !== undefined && res !== null) {
-//           this.googleFinds = JSON.parse(res);
-//           this.showGoogleFinds();
-//           console.log("response", this.googleFinds);
-//           setTimeout(() => this.typeOfMessage = 1, 1000);
-//         }
-//       });
+    this._chatBotService.getProvider(data)
+      .subscribe(res => {
+        if (res !== undefined && res !== null) {
+          this.googleFinds = JSON.parse(res);
+          this.showGoogleFinds();
+          console.log("response", this.googleFinds);
+          setTimeout(() => this.typeOfMessage = 1, 1000);
+        }
+      });
   }
 
   public showGoogleFinds(isRight?: boolean) {

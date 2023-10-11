@@ -16,7 +16,7 @@
       </div>
       <div class="chat-container" *ngIf="chatInitiated">
 
-        <div class="google-suggestion" *ngIf="googleFindContent.length > 0">
+        <div class="google-suggestion" *ngIf="googleFindContent.length > 0 && typeOfMessage === 1">
           <span class="material-symbols-outlined pointer"
                 (click)="showGoogleFinds(false)"
                 [ngStyle]="googleFinds.indexOf(googleFindContent[0]) > 0 ? {'color': 'blue' } : {'color': '#0000ff42' }">
@@ -89,7 +89,7 @@ arrow_forward_ios
                     placeholder="Type your answer"
                     maxlength="5000"
                     (keydown.enter)="onSubmit()"></textarea>
-          <span class="material-symbols-outlined send-btn pointer" (click)="onSubmit()">send</span>
+          <span class="material-symbols-outlined send-btn pointer"  (click)="onSubmit()" style="margin-top:0.3rem">send</span>
         </form>
         <div style="opacity: 0.5">Powered by <strong>Ideas2IT</strong></div>
       </div>
