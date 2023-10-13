@@ -15,7 +15,7 @@ export class ChatBotComponent {
   public typeOfMessage: number = 0;
   public specializationRequest: string [] = [];
   public googleFinds: any [] = [];
-
+  public pastMessages: any[] = [];
   public googleFindContent: any [] = [];
 
   constructor(private _fb: FormBuilder,
@@ -27,10 +27,9 @@ export class ChatBotComponent {
   }
 
   public onSubmit() {
-    const message = this.chatBox.value.chatPrompt
+    var message = this.chatBox.value.chatPrompt
     if (message != null && message) {
       this.messagePrompt.push({message: message, gptMessage: false});
-
       if (this.typeOfMessage === 0) {
         this.sendMessageToGpt(message);
       } else if (this.typeOfMessage === 2) {
@@ -49,7 +48,6 @@ export class ChatBotComponent {
       this.messagePrompt.push({message: "Please state your location", gptMessage: true});
       this.chatBox.get('chatPrompt')?.enable();
       }, 1500);
-
     } else if (val === 2) {
       this.messagePrompt.push({message: "I would like to continue", gptMessage: false});
       setTimeout(() => {
@@ -161,5 +159,4 @@ export class ChatBotComponent {
 interface ChatMessage {
   message: string;
   gptMessage: boolean;
-
 }
