@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {ChatBotService} from "../../core/services/chat-bot.service";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-home',
@@ -19,7 +20,9 @@ export class ChatBotComponent {
   public googleFindContent: any [] = [];
 
   constructor(private _fb: FormBuilder,
-              private _chatBotService: ChatBotService) {
+              private _chatBotService: ChatBotService,
+              private titleService: Title) {
+    this.titleService.setTitle("MediBot");
     this.chatBox = _fb.group({
       chatPrompt: [{value: "", disabled: false}]
     });
@@ -60,7 +63,10 @@ export class ChatBotComponent {
       this.chatInitiated = false;
       this.messagePrompt = [];
       this.typeOfMessage = 0;
+      this.specializationRequest = [];
     }
+    this.googleFinds = [];
+    this.googleFindContent = [];
   }
 
   public getStarted() {
@@ -92,18 +98,17 @@ export class ChatBotComponent {
           this.messagePrompt.push({message: response.message, gptMessage: true});
           this.chatBox.get('chatPrompt')?.enable();
           setTimeout(() => this.typeOfMessage = 1, 1000);
-          this.findSpecialization(message);
+          this.findSpecialization(response.message);
         }
       });
   }
 
   private findProvidersLocation(message: string) {
+    console.log(this.specializationRequest);
     const data = {
       location : message,
       specialization: this.specializationRequest.toString()
     }
-    this.showGoogleFinds();
-    setTimeout(() => this.typeOfMessage = 1, 1000);
     this._chatBotService.getProvider(data)
       .subscribe(res => {
         if (res !== undefined && res !== null) {
@@ -136,17 +141,17 @@ export class ChatBotComponent {
       'Oncologist', 'Ophthalmologist', 'Orthopedics', 'Otolaryngology',
       'Pathologist', 'Pediatrician', 'Physical', 'Rehabilitation',
       'Psychiatrist', 'Pulmonologist', 'Radiologist', 'Rheumatologist', 'Surgery',
-      'Urology', 'Addiction', 'Allergist', 'Immunologist', 'Barbaric', 'Cardio-thoracic',
+      'Urology', 'Addiction', 'Allergist', 'Immunologist', 'Barbaric', 'Cardio-thoracic','Cardiothoracic',
       'Colorectal', 'Family', 'Forensic', 'Geriatrician', 'Interventional',
       'Maternal-Fetal', 'Neonatologist', 'Acupuncturist', 'Physiotherapist', 'Osteopath',
       'cardiomyopathy', 'physiotherapist', 'therapist', 'reflexology', 'osteopath',
-      'Arthroscopic', 'Osteoarthritis', 'diabetes', 'Hypothermia', 'Orthopedic Surgeon', 'ENT Specialist',
-       'Nephrologist']
+      'Arthroscopic', 'Osteoarthritis', 'diabetes', 'Hypothermia', 'Orthopedic Surgeon', 'ENT',
+      'Nephrologist', 'otolaryngologist']
 
     const gptResponseList = gptResponse.split(" ");
     console.log(gptResponseList);
     gptResponseList.forEach((res: string) => {
-      if (specialization.includes(res)) {
+      if (specialization.some(result => result.toLowerCase() === res.toLowerCase())) {
         this.specializationRequest.push(res);
       }
     });
